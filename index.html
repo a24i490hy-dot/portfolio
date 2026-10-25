@@ -1,0 +1,768 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>heir house sachi</title>
+
+  <style>
+    /* ページ全体 */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans JP", sans-serif;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    /* ヘッダー */
+    header {
+      min-height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10%;
+      background-color: white;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #a78b70;
+    }
+
+    /* メインビジュアル */
+    .hero {
+      height: 600px;
+      display: flex;
+      align-items: center;
+      padding: 0 10%;
+      background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.35),
+          rgba(0, 0, 0, 0.35)
+        ),
+        url("https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      line-height: 1.4;
+      letter-spacing: 3px;
+      font-weight: normal;
+    }
+
+    .hero p {
+      font-size: 16px;
+      letter-spacing: 2px;
+    }
+
+    /* 共通の見出し */
+    .section-title {
+      text-align: center;
+      font-size: 30px;
+      font-weight: normal;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 60px;
+    }
+
+    /* 店舗紹介 */
+    .店舗紹介 {
+      padding: 100px 10%;
+      background-color: #f8f6f2;
+    }
+
+    .店舗紹介-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .店舗紹介 h2 {
+      font-size: 28px;
+      font-weight: normal;
+      margin: 0 0 20px;
+    }
+
+    .店舗紹介 p {
+      font-size: 15px;
+      line-height: 2.2;
+      font-weight: normal;
+    }
+
+    /* スタイリスト紹介 */
+    .スタイリスト紹介 {
+      padding: 100px 10%;
+      background-color: white;
+    }
+
+    .スタイリスト-list {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* 写真と文章を横並びにする */
+    .スタイリスト-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 50px;
+      margin-bottom: 80px;
+    }
+
+    .スタイリスト-card:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 偶数番目は写真と文章を逆にする */
+    .スタイリスト-card:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    /* 写真 */
+    .スタイリスト-image {
+      flex: 0 0 40%;
+      min-width: 0;
+    }
+
+    .スタイリスト-image img {
+      display: block;
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+    }
+
+    /* 紹介文 */
+    .スタイリスト-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .スタイリスト-text .role {
+      color: #a78b70;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin: 0 0 10px;
+    }
+
+    .スタイリスト-text h3 {
+      font-size: 25px;
+      font-weight: normal;
+      margin: 0 0 5px;
+    }
+
+    .スタイリスト-text .name-en {
+      color: #999;
+      font-size: 13px;
+      margin: 0 0 20px;
+    }
+
+    .スタイリスト-text p {
+      font-size: 14px;
+      line-height: 2.1;
+    }
+
+    /* メニュー表 */
+    .menu-section {
+      padding: 100px 10%;
+      background-color: #f8f6f2;
+    }
+
+    .menu-section .section-title {
+      margin-bottom: 10px;
+    }
+
+    .menu-subtitle {
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 60px;
+    }
+
+    .menu-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px 70px;
+    }
+
+    .menu-category h3 {
+      font-size: 20px;
+      font-weight: normal;
+      letter-spacing: 2px;
+      border-bottom: 1px solid #b6a18b;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5dfd7;
+      font-size: 14px;
+    }
+
+    .menu-price {
+      white-space: nowrap;
+      font-weight: bold;
+      color: #8c7258;
+    }
+
+    .menu-note {
+      max-width: 900px;
+      margin: 45px auto 0;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.8;
+    }
+
+    /* お問い合わせ */
+    .contact {
+      padding: 45px 10%;
+      text-align: center;
+      background-color: #222;
+      color: white;
+    }
+
+    .contact .section-title {
+      margin-bottom: 5px;
+    }
+
+    .contact .section-subtitle {
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+
+    .contact a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 35px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .contact a:hover {
+      background-color: white;
+      color: #222;
+    }
+
+    /* フッター */
+    footer {
+      padding: 20px;
+      text-align: center;
+      background-color: #171717;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    /* =================================
+       スマートフォン対応
+       ================================= */
+    @media (max-width: 700px) {
+
+      /* ヘッダー */
+      header {
+        min-height: 70px;
+        padding: 18px 5%;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 19px;
+        text-align: center;
+      }
+
+      nav {
+        width: 100%;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a {
+        font-size: 11px;
+      }
+
+      /* メイン画像 */
+      .hero {
+        height: 430px;
+        padding: 0 7%;
+        background-position: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(26px, 7vw, 34px);
+        letter-spacing: 1px;
+      }
+
+      .hero p {
+        font-size: 13px;
+        letter-spacing: 1px;
+      }
+
+      /* 各セクションの余白 */
+      .店舗紹介,
+      .スタイリスト紹介,
+      .menu-section {
+        padding: 55px 6%;
+      }
+
+      .店舗紹介 h2 {
+        font-size: 23px;
+      }
+
+      .店舗紹介 p {
+        font-size: 13px;
+        line-height: 2;
+      }
+
+      .section-title {
+        font-size: 24px;
+        letter-spacing: 2px;
+      }
+
+      .section-subtitle,
+      .menu-subtitle {
+        font-size: 12px;
+        margin-bottom: 30px;
+      }
+
+      /* スマホでも写真を左、文章を右にする */
+      .スタイリスト-card,
+      .スタイリスト-card:nth-child(even) {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 45px;
+      }
+
+      .スタイリスト-image {
+        flex: 0 0 40%;
+        min-width: 0;
+      }
+
+      .スタイリスト-image img {
+        display: block;
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      .スタイリスト-text {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .スタイリスト-text .role {
+        font-size: 9px;
+        letter-spacing: 1px;
+        margin: 0 0 4px;
+      }
+
+      .スタイリスト-text h3 {
+        font-size: 17px;
+        line-height: 1.5;
+        margin: 0 0 4px;
+      }
+
+      .スタイリスト-text .name-en {
+        font-size: 10px;
+        overflow-wrap: anywhere;
+        margin: 0 0 8px;
+      }
+
+      .スタイリスト-text p {
+        font-size: 11px;
+        line-height: 1.75;
+        margin-top: 5px;
+      }
+
+      /* メニューを1列にする */
+      .menu-list {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .menu-category h3 {
+        font-size: 17px;
+      }
+
+      .menu-item {
+        gap: 8px;
+        font-size: 12px;
+      }
+
+      .menu-price {
+        font-size: 12px;
+      }
+
+      .menu-note {
+        margin-top: 30px;
+        font-size: 11px;
+      }
+
+      /* お問い合わせ */
+      .contact {
+        padding: 30px 6%;
+      }
+
+      .contact p {
+        font-size: 12px;
+      }
+
+      .contact a {
+        padding: 9px 25px;
+        font-size: 12px;
+      }
+
+      /* フッター */
+      footer {
+        padding: 15px 10px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="logo">heir house sachi</div>
+
+    <nav>
+      <a href="#home">HOME</a>
+      <a href="#about">ABOUT</a>
+      <a href="#stylist">STYLIST</a>
+      <a href="#menu">MENU</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <!-- メインビジュアル -->
+  <section class="hero" id="home">
+    <div>
+      <h1>Welcome to<br>heir house sachi</h1>
+      <p>あなたらしさを大切にするヘアサロン</p>
+    </div>
+  </section>
+
+  <!-- 店舗紹介 -->
+  <section class="店舗紹介" id="about">
+    <div class="店舗紹介-content">
+      <h2>自分らしいスタイルを見つける</h2>
+
+      <p>
+        heir house sachiは、一人ひとりの個性を大切にするヘアサロンです。<br>
+        髪のお悩みや希望を丁寧にお聞きし、毎日が楽しくなるヘアスタイルをご提案します。<br>
+        落ち着いた空間で、ゆっくりとした時間をお過ごしください。
+      </p>
+    </div>
+  </section>
+
+  <!-- スタイリスト紹介 -->
+  <section class="スタイリスト紹介" id="stylist">
+
+    <h2 class="section-title">STYLIST</h2>
+    <p class="section-subtitle">スタイリスト紹介</p>
+
+    <div class="スタイリスト-list">
+
+      <!-- スタイリスト1 -->
+      <div class="スタイリスト-card">
+
+        <div class="スタイリスト-image">
+          <img
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80"
+            alt="スタイリスト佐藤美咲">
+        </div>
+
+        <div class="スタイリスト-text">
+          <p class="role">TOP STYLIST</p>
+          <h3>佐藤 美咲</h3>
+          <p class="name-en">Misaki Sato</p>
+
+          <p>
+            ナチュラルなスタイルや韓国風ヘアを得意としています。お客様一人ひとりの雰囲気や希望、髪質に合わせて、自然でおしゃれなヘアスタイルをご提案します。トレンドを取り入れた韓国風のレイヤーカットや、柔らかくまとまるナチュラルなスタイルなど、幅広いデザインに対応しています。また、サロンでの仕上がりを自宅でも再現できるように、髪の乾かし方やスタイリングの方法も丁寧にお伝えします。自分に似合う髪型を見つけたい方や、いつもと少し違うスタイルに挑戦してみたい方も、ぜひお気軽にご相談ください。
+          </p>
+        </div>
+
+      </div>
+
+      <!-- スタイリスト2 -->
+      <div class="スタイリスト-card">
+
+        <div class="スタイリスト-image">
+          <img
+            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80"
+            alt="スタイリスト山田蓮">
+        </div>
+
+        <div class="スタイリスト-text">
+          <p class="role">STYLIST</p>
+          <h3>山田 蓮</h3>
+          <p class="name-en">Ren Yamada</p>
+
+          <p>
+            メンズカットやパーマスタイルを得意としています。お客様一人ひとりの髪質や骨格、普段のファッションに合わせて、似合うヘアスタイルをご提案します。かっこよく自然にまとまるスタイルから、雰囲気を大きく変えるパーマまで、幅広く対応しています。また、自宅でも簡単にセットできるように、ワックスの使い方やスタイリングのコツも丁寧にお伝えします。髪型に悩んでいる方や、新しいスタイルに挑戦してみたい方も、ぜひお気軽にご相談ください。
+          </p>
+        </div>
+
+      </div>
+
+      <!-- スタイリスト3 -->
+      <div class="スタイリスト-card">
+
+        <div class="スタイリスト-image">
+          <img
+            src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=800&q=80"
+            alt="スタイリスト小林彩花">
+        </div>
+
+        <div class="スタイリスト-text">
+          <p class="role">COLORIST</p>
+          <h3>小林 彩花</h3>
+          <p class="name-en">Ayaka Kobayashi</p>
+
+          <p>
+            透明感のあるカラーや柔らかい色味を作ることが得意です。お客様一人ひとりの髪質や肌の色、雰囲気に合わせて、自然になじむカラーをご提案します。ナチュラルなブラウン系から、明るく透明感のあるカラーまで、幅広いスタイルに対応しています。また、髪への負担にも気を配りながら、きれいな色味を長く楽しめるように丁寧に施術します。カラーで雰囲気を変えたい方や、自分に似合う色が分からない方も、ぜひお気軽にご相談ください。
+          </p>
+        </div>
+
+      </div>
+
+      <!-- スタイリスト4 -->
+      <div class="スタイリスト-card">
+
+        <div class="スタイリスト-image">
+          <img
+            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
+            alt="スタイリスト中村優奈">
+        </div>
+
+        <div class="スタイリスト-text">
+          <p class="role">STYLIST</p>
+          <h3>中村 優奈</h3>
+          <p class="name-en">Yuna Nakamura</p>
+
+          <p>
+            ショートヘアやボブスタイルを得意としています。お客様一人ひとりの顔の形や髪質、髪のクセに合わせて、自然にまとまりやすく、自分に似合うヘアスタイルをご提案します。すっきりとしたショートヘアから、柔らかく女性らしいボブスタイルまで、さまざまなデザインに対応しています。また、毎日のスタイリングが簡単になるように、乾かし方やセットのコツも丁寧にお伝えします。イメージチェンジを考えている方や、自分に似合う髪型を見つけたい方も、ぜひお気軽にご相談ください。
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- メニュー表 -->
+  <section class="menu-section" id="menu">
+
+    <h2 class="section-title">MENU</h2>
+    <p class="menu-subtitle">メニュー・料金</p>
+
+    <div class="menu-list">
+
+      <!-- カット -->
+      <div class="menu-category">
+        <h3>CUT｜カット</h3>
+
+        <div class="menu-item">
+          <span>カット</span>
+          <span class="menu-price">¥5,500</span>
+        </div>
+
+        <div class="menu-item">
+          <span>メンズカット</span>
+          <span class="menu-price">¥4,400</span>
+        </div>
+
+        <div class="menu-item">
+          <span>学生カット</span>
+          <span class="menu-price">¥3,300</span>
+        </div>
+
+        <div class="menu-item">
+          <span>前髪カット</span>
+          <span class="menu-price">¥1,100</span>
+        </div>
+      </div>
+
+      <!-- カラー -->
+      <div class="menu-category">
+        <h3>COLOR｜カラー</h3>
+
+        <div class="menu-item">
+          <span>ワンカラー</span>
+          <span class="menu-price">¥7,700</span>
+        </div>
+
+        <div class="menu-item">
+          <span>透明感カラー</span>
+          <span class="menu-price">¥8,800</span>
+        </div>
+
+        <div class="menu-item">
+          <span>ブリーチカラー</span>
+          <span class="menu-price">¥13,200〜</span>
+        </div>
+
+        <div class="menu-item">
+          <span>リタッチカラー</span>
+          <span class="menu-price">¥5,500</span>
+        </div>
+      </div>
+
+      <!-- パーマ -->
+      <div class="menu-category">
+        <h3>PERM｜パーマ</h3>
+
+        <div class="menu-item">
+          <span>ナチュラルパーマ</span>
+          <span class="menu-price">¥8,800</span>
+        </div>
+
+        <div class="menu-item">
+          <span>メンズパーマ</span>
+          <span class="menu-price">¥9,900</span>
+        </div>
+
+        <div class="menu-item">
+          <span>デジタルパーマ</span>
+          <span class="menu-price">¥13,200〜</span>
+        </div>
+      </div>
+
+      <!-- トリートメント -->
+      <div class="menu-category">
+        <h3>TREATMENT｜トリートメント</h3>
+
+        <div class="menu-item">
+          <span>クイックトリートメント</span>
+          <span class="menu-price">¥2,200</span>
+        </div>
+
+        <div class="menu-item">
+          <span>集中ケアトリートメント</span>
+          <span class="menu-price">¥4,400</span>
+        </div>
+
+        <div class="menu-item">
+          <span>プレミアムトリートメント</span>
+          <span class="menu-price">¥6,600</span>
+        </div>
+      </div>
+
+      <!-- その他 -->
+      <div class="menu-category">
+        <h3>OTHER｜その他</h3>
+
+        <div class="menu-item">
+          <span>シャンプー・ブロー</span>
+          <span class="menu-price">¥2,750</span>
+        </div>
+
+        <div class="menu-item">
+          <span>ヘッドスパ</span>
+          <span class="menu-price">¥4,400</span>
+        </div>
+
+        <div class="menu-item">
+          <span>ヘアセット</span>
+          <span class="menu-price">¥4,400</span>
+        </div>
+      </div>
+
+      <!-- セットメニュー -->
+      <div class="menu-category">
+        <h3>SET MENU｜セット</h3>
+
+        <div class="menu-item">
+          <span>カット＋カラー</span>
+          <span class="menu-price">¥12,100</span>
+        </div>
+
+        <div class="menu-item">
+          <span>カット＋パーマ</span>
+          <span class="menu-price">¥12,100</span>
+        </div>
+
+        <div class="menu-item">
+          <span>カット＋カラー＋トリートメント</span>
+          <span class="menu-price">¥15,400</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="menu-note">
+      ※ 料金はすべて税込のサンプル価格です。<br>
+      ※ 髪の長さや施術内容によって追加料金が発生する場合があります。
+    </p>
+
+  </section>
+
+  <!-- お問い合わせ -->
+  <section class="contact" id="contact">
+
+    <h2 class="section-title">CONTACT</h2>
+    <p class="section-subtitle">お問い合わせ</p>
+
+    <p>ご予約やご相談はこちらから</p>
+    <a href="mailto:info@example.com">お問い合わせ</a>
+
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <p>&copy; 2026 heir house sachi</p>
+  </footer>
+
+</body>
+</html>
