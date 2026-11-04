@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>みどり市 粗大ごみ受付</title>
+<style>
+  body { margin: 0; background: #eef2ee; color: #18221d; font-family: "BIZ UDPGothic", sans-serif; line-height: 1.7; }
+  main { max-width: 420px; min-height: 100vh; margin: 0 auto; padding: 16px; box-sizing: border-box; background: #fff; }
+  h1 { font-size: 22px; margin-top: 0; }
+  .step { color: #4c5952; font-size: 14px; }
+
+  /* キーボード操作中の位置見せる */
+  :focus-visible { outline: 3px solid #1747c9; outline-offset: 2px; }
+
+  fieldset { border: 0; padding: 0; margin: 0 0 16px; }
+  legend { font-weight: bold; margin-bottom: 8px; }
+  /* 選択肢はタップしやすいよう、枠全体を押せるように */
+  .card { display: flex; gap: 10px; padding: 12px; margin-bottom: 8px; border: 2px solid #c3cdc6; border-radius: 8px; }
+  .card:has(input:checked) { border-color: #1d6a4c; background: #dcebe2; }
+  .card:has(input:disabled) { color: #4c5952; border-style: dashed; }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-weight: bold; }
+  input[type=text], input[type=tel] { width: 100%; box-sizing: border-box; padding: 10px; font-size: 16px; border: 2px solid #4c5952; border-radius: 8px; }
+  [aria-invalid="true"] { border-color: #b42318 !important; background: #fbe9e7; }
+  .error { color: #b42318; font-weight: bold; margin: 4px 0; }
+
+  .total { font-size: 18px; font-weight: bold; }
+  button { width: 100%; min-height: 48px; margin-top: 8px; font-size: 16px; font-weight: bold; border: 2px solid #1d6a4c; border-radius: 8px; background: #1d6a4c; color: #fff; }
+  button.back { background: #fff; color: #1d6a4c; }
+  .receipt { font-size: 28px; font-weight: bold; letter-spacing: 2px; text-align: center; border: 2px solid #18221d; border-radius: 8px; padding: 12px; }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- 画面1の品目を選ぶ -->
+  <section id="screen1">
+    <p class="step">ステップ 1 / 4</p>
+    <h1 tabindex="-1">出したいものを選ぶ</h1>
+    <fieldset>
+      <legend>品目（選ぶと手数料が分かります）</legend>
+      <label class="card"><input type="checkbox" name="item" data-fee="800"> ソファ（1人掛け）800円</label>
+      <label class="card"><input type="checkbox" name="item" data-fee="400"> 自転車 400円</label>
+      <label class="card"><input type="checkbox" name="item" data-fee="400"> 布団 400円</label>
+      <label class="card"><input type="checkbox" name="item" data-fee="1200"> 学習机 1,200円</label>
+    </fieldset>
+    <!-- aria-live：合計が変わると読み上げソフトが自動で読む -->
+    <p class="total" aria-live="polite">手数料の合計 <span id="total">0</span>円</p>
+    <p class="error" id="error1"></p>
+    <button onclick="next1()">収集日を選ぶ</button>
+  </section>
+
+  <!-- 画面2の収集日を選ぶ -->
+  <section id="screen2" hidden>
+    <p class="step">ステップ 2 / 4</p>
+    <h1 tabindex="-1">収集日を選ぶ</h1>
+    <fieldset>
+      <legend>収集日（申し込みは3日前の17時まで）</legend>
+      <label class="card"><input type="radio" name="date" value="11月4日（水）"> 11月4日（水）</label>
+      <!-- 満員の日は消さずに、文字で理由を書く（色だけで伝えない） -->
+      <label class="card"><input type="radio" name="date" disabled> 11月11日（水）受付終了（満）</label>
+      <label class="card"><input type="radio" name="date" value="11月18日（水）"> 11月18日（水）</label>
+    </fieldset>
+    <p class="error" id="error2"></p>
+    <button onclick="next2()">申込者の入力へ</button>
+    <button class="back" onclick="show('screen1')">戻る</button>
+  </section>
+
+  <!-- 画面3の申込者の情報 -->
+  <section id="screen3" hidden>
+    <p class="step">ステップ 3 / 4</p>
+    <h1 tabindex="-1">申込者の情報を入力</h1>
+    <div class="field">
+      <label for="name">氏名（必須）</label>
+      <!-- aria-describedby：入力欄とエラー文をつなげ、一緒に読み上げる -->
+      <input type="text" id="name" autocomplete="name" aria-describedby="name-error">
+      <p class="error" id="name-error"></p>
+    </div>
+    <div class="field">
+      <label for="tel">電話番号（必須・ハイフンはあってもなくても可）</label>
+      <input type="tel" id="tel" autocomplete="tel" aria-describedby="tel-error">
+      <p class="error" id="tel-error"></p>
+    </div>
+    <button onclick="next3()">確認画面へ</button>
+    <button class="back" onclick="show('screen2')">戻る</button>
+  </section>
+
+  <!-- 画面4確認 -->
+  <section id="screen4" hidden>
+    <p class="step">ステップ 4 / 4</p>
+    <h1 tabindex="-1">内容を確認する</h1>
+    <p>まだ申し込みは完了していません。</p>
+    <p>手数料：<span id="c-total"></span>円</p>
+    <p>収集日：<span id="c-date"></span></p>
+    <p>氏名：<span id="c-name"></span></p>
+    <p>電話番号：<span id="c-tel"></span></p>
+    <!-- 「送信」ではなく、押した結果が分かる言葉にする -->
+    <button onclick="submitForm()">この内容で申し込む</button>
+    <button class="back" onclick="show('screen3')">修正する</button>
+  </section>
+
+  <!-- 画面5完了 -->
+  <section id="screen5" hidden>
+    <h1 tabindex="-1">申し込みが完了しました</h1>
+    <p>受付番号（手数料券に書きます）</p>
+    <p class="receipt" id="receipt"></p>
+    <p>このあとすること</p>
+    <ol>
+      <li>コンビニで手数料券を <span id="d-total"></span>円分買う</li>
+      <li>券に受付番号を書いて、品目に貼る</li>
+      <li><span id="d-date"></span>の朝8時30分までに出す</li>
+    </ol>
+  </section>
+
+</main>
+
+<script>
+  // 画面を切り替えて、見出しにフォーカスを移す
+  // （読み上げソフトの利用者にも、画面が変わったことが伝わる）
+  function show(id) {
+    document.querySelectorAll('section').forEach(s => s.hidden = true);
+    const screen = document.getElementById(id);
+    screen.hidden = false;
+    screen.querySelector('h1').focus();
+  }
+
+  // 選んだ品目の手数料を合計する
+  function getTotal() {
+    let sum = 0;
+    document.querySelectorAll('input[name=item]:checked').forEach(item => {
+      sum += Number(item.dataset.fee);
+    });
+    return sum;
+  }
+
+  // 品目を選ぶたびに合計を更新する
+  document.querySelectorAll('input[name=item]').forEach(item => {
+    item.addEventListener('change', () => {
+      document.getElementById('total').textContent = getTotal().toLocaleString();
+    });
+  });
+
+  // 入力欄をチェックして、エラーなら理由表示
+  function check(id, isValid, message) {
+    document.getElementById(id).setAttribute('aria-invalid', !isValid);
+    document.getElementById(id + '-error').textContent = isValid ? '' : message;
+    return isValid;
+  }
+
+  // 画面1 → 2
+  function next1() {
+    if (getTotal() === 0) {
+      document.getElementById('error1').textContent = '出したいものを1つ以上選んでください';
+      return;
+    }
+    document.getElementById('error1').textContent = '';
+    show('screen2');
+  }
+
+  // 画面2 → 3
+  function next2() {
+    if (!document.querySelector('input[name=date]:checked')) {
+      document.getElementById('error2').textContent = '収集日を選んでください';
+      return;
+    }
+    document.getElementById('error2').textContent = '';
+    show('screen3');
+  }
+
+  // 画面3 → 4
+  function next3() {
+    const name = document.getElementById('name').value.trim();
+    const tel = document.getElementById('tel').value.replace(/-/g, '');
+
+    const nameOk = check('name', name !== '', '氏名を入力してください');
+    const telOk = check('tel', /^0\d{9,10}$/.test(tel), '電話番号は0から始まる10桁か11桁で入力してください');
+
+    // エラーがあれば、最初のエラー欄にフォーカスを移す
+    if (!nameOk) { document.getElementById('name').focus(); return; }
+    if (!telOk) { document.getElementById('tel').focus(); return; }
+
+    // 確認画面に内容を入れる
+    const date = document.querySelector('input[name=date]:checked').value;
+    document.getElementById('c-total').textContent = getTotal().toLocaleString();
+    document.getElementById('c-date').textContent = date;
+    document.getElementById('c-name').textContent = name;
+    document.getElementById('c-tel').textContent = tel;
+    show('screen4');
+  }
+
+  // 申し込み → 完了画面
+  function submitForm() {
+    const number = Math.floor(Math.random() * 9000) + 1000;
+    document.getElementById('receipt').textContent = 'R8-' + number;
+    document.getElementById('d-total').textContent = getTotal().toLocaleString();
+    document.getElementById('d-date').textContent = document.querySelector('input[name=date]:checked').value;
+    show('screen5');
+  }
+</script>
+</body>
+</html>
