@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>画面3 CSSつき</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&amp;family=BIZ+UDGothic&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1d6a4c}a:hover{color:#18221d}
+.v{position:absolute;width:9px;box-sizing:border-box;border-top:1.5px solid #c8175d;border-bottom:1.5px solid #c8175d;background:linear-gradient(#c8175d,#c8175d) center/1.5px 100% no-repeat}
+.h{position:absolute;height:9px;box-sizing:border-box;border-left:1.5px solid #c8175d;border-right:1.5px solid #c8175d;background:linear-gradient(#c8175d,#c8175d) center/100% 1.5px no-repeat}
+.pill{position:absolute;background:#c8175d;color:#ffffff;font-size:11px;font-weight:700;line-height:14px;padding:0 5px;border-radius:3px;white-space:nowrap}
+.tag{position:absolute;background:#ffffff;color:#1747c9;border:1.5px solid #1747c9;font-size:11px;font-weight:700;line-height:14px;padding:0 5px;border-radius:3px;white-space:nowrap}
+.code{padding:8px 10px;background:#ffffff;border-radius:6px;font-family:'BIZ UDGothic',ui-monospace,monospace;font-size:11.5px;line-height:1.45;color:#18221d;overflow-wrap:anywhere}
+.code .c{color:#4c5952}
+.code .p{padding-left:2em}
+.code .m{color:#1d6a4c;font-family:'BIZ UDPGothic',sans-serif;margin-left:8px}
+</style>
+</head>
+<body>
+<div style="width: 540px; height: 1250px; position: relative; background: #eef2ee; color: #18221d; font-family: 'BIZ UDPGothic', sans-serif; overflow: hidden">
+
+  <div style="position: absolute; left: 24px; top: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; line-height: 1.4">
+    <span style="font-size: 15px; font-weight: 700">画面3 のCSS（電話番号はエラーの状態）</span>
+    <span style="display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center">
+      <span style="display: flex; align-items: center; gap: 5px"><span style="width: 14px; height: 10px; background: #c8175d"></span>赤：すき間（padding・margin・gap）</span>
+      <span style="display: flex; align-items: center; gap: 5px"><span style="width: 14px; height: 10px; border: 1.5px solid #1747c9; box-sizing: border-box"></span>青：CSSの名前 → プロパティと値</span>
+      <span style="display: flex; align-items: center; gap: 5px"><span style="width: 14px; height: 10px; border: 1.5px dashed #1747c9; box-sizing: border-box"></span>点線：.field の箱</span>
+    </span>
+  </div>
+
+  <div style="position: absolute; left: 70px; top: 110px; width: 390px; height: 508px; background: #ffffff">
+
+    <div style="position: absolute; left: 0; top: 0; width: 390px; height: 16px; background: #f9d3e0"></div>
+    <div style="position: absolute; left: 0; top: 492px; width: 390px; height: 16px; background: #f9d3e0"></div>
+    <div style="position: absolute; left: 0; top: 0; width: 16px; height: 508px; background: #f9d3e0"></div>
+    <div style="position: absolute; left: 374px; top: 0; width: 16px; height: 508px; background: #f9d3e0"></div>
+
+    <p style="position: absolute; left: 16px; top: 30px; margin: 0; font-size: 14px; line-height: 24px; color: #4c5952">ステップ 3 / 4</p>
+    <h1 style="position: absolute; left: 16px; top: 68px; margin: 0; font-size: 22px; line-height: 38px">申込者の情報を入力</h1>
+
+    <label for="s3-name" style="position: absolute; left: 16px; top: 121px; width: 358px; font-size: 16px; line-height: 27px; font-weight: 700">氏名（必須）</label>
+    <input type="text" id="s3-name" style="position: absolute; left: 16px; top: 148px; width: 358px; height: 44px; box-sizing: border-box; padding: 10px; font-family: inherit; font-size: 16px; border: 2px solid #4c5952; border-radius: 8px; background: #ffffff">
+
+    <label for="s3-tel" style="position: absolute; left: 16px; top: 208px; width: 358px; font-size: 16px; line-height: 27px; font-weight: 700">電話番号（必須・ハイフンはあってもなくても可）</label>
+    <input type="tel" id="s3-tel" value="090-1234" style="position: absolute; left: 16px; top: 262px; width: 358px; height: 44px; box-sizing: border-box; padding: 10px; font-family: inherit; font-size: 16px; border: 2px solid #b42318; border-radius: 8px; background: #fbe9e7; color: #18221d">
+    <p style="position: absolute; left: 16px; top: 310px; width: 358px; margin: 0; font-size: 16px; line-height: 27px; font-weight: 700; color: #b42318">電話番号は0から始まる10桁か11桁で入力してください</p>
+
+    <button style="position: absolute; left: 16px; top: 388px; width: 358px; height: 48px; font-family: inherit; font-size: 16px; font-weight: 700; border: 2px solid #1d6a4c; border-radius: 8px; background: #1d6a4c; color: #ffffff">確認画面へ</button>
+    <button style="position: absolute; left: 16px; top: 444px; width: 358px; height: 48px; font-family: inherit; font-size: 16px; font-weight: 700; border: 2px solid #1d6a4c; border-radius: 8px; background: #ffffff; color: #1d6a4c">戻る</button>
+
+    <div style="position: absolute; left: 10px; top: 117px; width: 370px; height: 79px; box-sizing: border-box; border: 1.5px dashed #1747c9; border-radius: 4px"></div>
+    <div style="position: absolute; left: 10px; top: 204px; width: 370px; height: 164px; box-sizing: border-box; border: 1.5px dashed #1747c9; border-radius: 4px"></div>
+
+    <div class="h" style="left: 0; top: -30px; width: 390px"></div>
+    <span class="pill" style="left: 90px; top: -50px">width 390px（max-width は 420px）</span>
+    <div class="h" style="left: 0; top: 38px; width: 16px"></div>
+    <span class="pill" style="left: -68px; top: 35px">padding 16</span>
+    <div class="h" style="left: 374px; top: 38px; width: 16px"></div>
+    <span class="pill" style="left: 396px; top: 35px">padding 16</span>
+
+    <div class="v" style="left: 336px; top: 0; height: 16px"></div>
+    <span class="pill" style="left: 348px; top: 1px">padding 16</span>
+    <div class="v" style="left: 336px; top: 16px; height: 14px"></div>
+    <span class="pill" style="left: 348px; top: 16px">margin 14（自動）</span>
+    <div class="v" style="left: 336px; top: 54px; height: 14px"></div>
+    <span class="pill" style="left: 348px; top: 54px">margin 14（自動）</span>
+    <div class="v" style="left: 336px; top: 106px; height: 15px"></div>
+    <span class="pill" style="left: 348px; top: 99px">margin 15（自動）</span>
+    <div class="v" style="left: 336px; top: 192px; height: 16px"></div>
+    <span class="pill" style="left: 348px; top: 193px">margin-bottom 16</span>
+    <div class="v" style="left: 336px; top: 306px; height: 4px"></div>
+    <span class="pill" style="left: 348px; top: 298px">margin 4</span>
+    <div class="v" style="left: 336px; top: 364px; height: 24px"></div>
+    <span class="pill" style="left: 348px; top: 369px">margin 16＋8</span>
+    <div class="v" style="left: 336px; top: 436px; height: 8px"></div>
+    <span class="pill" style="left: 348px; top: 433px">margin-top 8</span>
+    <div class="v" style="left: 336px; top: 492px; height: 16px"></div>
+    <span class="pill" style="left: 348px; top: 493px">padding 16</span>
+
+    <div class="h" style="left: 18px; top: 156px; width: 10px"></div>
+    <span class="pill" style="left: 34px; top: 153px">padding 10</span>
+    <div class="v" style="left: 36px; top: 388px; height: 48px"></div>
+    <span class="pill" style="left: 48px; top: 405px">min-height 48</span>
+
+    <span class="tag" style="left: 120px; top: 34px">.step：font-size 14px・color #4c5952</span>
+    <span class="tag" style="left: 222px; top: 79px">h1：font-size 22px・margin-top 0</span>
+    <span class="tag" style="left: 150px; top: 102px">.field：margin-bottom 16px</span>
+    <span class="tag" style="left: 130px; top: 127px">.field label：display block・font-weight bold</span>
+    <span class="tag" style="left: 34px; top: 172px">input：width 100%・padding 10px・border 2px・border-radius 8px</span>
+    <span class="tag" style="left: 110px; top: 277px">input.invalid：border-color・background を赤に</span>
+    <span class="tag" style="left: 70px; top: 369px">.error：color 赤・font-weight bold・margin 4px</span>
+    <span class="tag" style="left: 244px; top: 405px">button：width 100%</span>
+    <span class="tag" style="left: 244px; top: 461px">button.back：background #fff</span>
+    <span class="tag" style="left: 110px; top: 0px">main：padding 16px・background #fff</span>
+    <span class="tag" style="left: 0px; top: 516px">button：background 緑・border-radius 8px・font-size 16px</span>
+  </div>
+  <span class="tag" style="left: 70px; top: 650px">body：margin 0・background・color・font-family・line-height 1.7</span>
+  <div style="position: absolute; left: 24px; top: 670px; width: 492px; display: flex; flex-direction: column; gap: 10px">
+    <span style="font-size: 15px; font-weight: 700">画面3 で新しく使うCSS（コード）</span>
+    <span style="font-size: 12px; color: #4c5952">画面1・2 と同じCSS（body・main・.step・h1・.error・button・button.back など）は省略しています。</span>
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; align-items: start">
+      <div class="code"><div class="c">/* 入力項目の箱 */</div><div>.field {</div><div class="p">margin-bottom: 16px;<span class="m">← 下に16px空ける（項目どうしの間）</span></div><div>}</div></div>
+      <div class="code"><div class="c">/* 入力欄のラベル */</div><div>.field label {</div><div class="p">display: block;<span class="m">← 1行まるごと使う（入力欄を下の行へ）</span></div><div class="p">font-weight: bold;<span class="m">← 太字にする</span></div><div>}</div></div>
+      <div class="code"><div class="c">/* 入力欄 */</div><div>input[type=text], input[type=tel] {</div><div class="p">width: 100%;<span class="m">← 横幅いっぱいにする</span></div><div class="p">box-sizing: border-box;<span class="m">← 余白と枠も含めて幅を計算する</span></div><div class="p">padding: 10px;<span class="m">← 内側の余白10px</span></div><div class="p">font-size: 16px;<span class="m">← 文字の大きさ16px（iPhoneで勝手に拡大されない）</span></div><div class="p">border: 2px solid #4c5952;<span class="m">← 2pxの濃いグレーの枠線</span></div><div class="p">border-radius: 8px;<span class="m">← 角を8px丸くする</span></div><div>}</div></div>
+      <div class="code"><div class="c">/* エラーのある入力欄 */</div><div>input.invalid {</div><div class="p">border-color: #b42318;<span class="m">← 枠線を赤にする</span></div><div class="p">background: #fbe9e7;<span class="m">← 背景を薄い赤にする</span></div><div>}</div></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
