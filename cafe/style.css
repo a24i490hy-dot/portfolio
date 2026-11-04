@@ -124,7 +124,7 @@ body {
   pointer-events: none;
 }
 
-/* マウスを追いかける光（動きは 透明.js） */
+/* マウスを追いかける光（動きは script.js） */
 .light {
   position: absolute;
   left: 0;
@@ -542,7 +542,7 @@ body {
   color: rgba(255,255,255,.85);
 }
 
-/* 紹介文のタイピング（動きは 透明.js） */
+/* 紹介文のタイピング（動きは script.js） */
 .type-char {
   opacity: 0;                   /* 最初は見えない */
   transition: opacity .3s;
