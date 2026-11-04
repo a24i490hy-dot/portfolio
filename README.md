@@ -7,5 +7,3 @@
 | `gomi/` | 粗大ごみ受付フォーム（スマートフォン向けWebフォーム） | HTML / CSS / JavaScript |
 | `hair/` | hair house sachi（美容室のWebサイト） | HTML / CSS |
 | `cafe/` | 珈琲 たくみ（カフェのWebサイト） | HTML / CSS / JavaScript |
-
-`gomi/design/` には、粗大ごみ受付フォームの設計資料（画面デザイン・UX・画面ごとのCSS）が入っています。
