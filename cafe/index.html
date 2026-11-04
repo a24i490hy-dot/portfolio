@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>珈琲 たくみ｜Specialty Coffee Tokyo</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<!-- 英語のフォント（Google Fonts） -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;500&family=Noto+Serif+JP:wght@300;400&family=Kaisei+Decol:wght@400;700&display=swap">
+<link rel="stylesheet" href="透明.css">
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header">
+    <div class="header-logo">Takumi Hirai</div>
+    <nav class="header-nav">
+      <!-- SNSと電話のアイコン（リンク先はあとで自分のものに変える） -->
+      <a href="#" class="nav-icon"><img src="./images/icon-instagram.png" alt="Instagram"></a>
+      <a href="#" class="nav-icon"><img src="./images/icon-twitter.png" alt="X（Twitter）"></a>
+      <a href="tel:0300000000" class="nav-icon"><img src="./images/icon-phone-call.png" alt="電話"></a>
+    </nav>
+  </header>
+
+  <!-- ===== トップ ===== -->
+  <div class="stage" id="stage">
+    <!-- 見出しとカフェの紹介 -->
+    <section class="hero">
+      <div class="hero-line"></div>
+      <p class="hero-eyebrow">SPECIALTY COFFEE · TOKYO</p>
+      <h1 class="hero-title">A quiet place<br>for <em>good coffee.</em></h1><!-- em強調 -->
+      <p class="hero-lead">Hand-poured coffee, made one cup at a time.<br>
+        Slow down, sip, and stay a while.</p>
+      <!-- お店の情報 -->
+      <div class="hero-info">
+        <div><b>OPEN</b>8:00 – 20:00</div>
+        <div><b>CLOSED</b>Wednesday</div>
+        <div><b>SEATS</b>8</div>
+      </div>
+    </section>
+    <!-- 背景のカフェの動画 -->
+    <video class="bg-cafe" src="cafe.mp4" autoplay muted loop playsinline></video>
+    <!-- 画面のまわりを少し暗くする -->
+    <div class="vignette"></div><!-- vignette（ビネット）は、写真のまわりだけを暗くする効果 -->
+    <div class="light" id="light"></div><!-- ぼんやりした白い光の玉 -->
+    <!-- 真ん中の「珈琲」 -->
+    <div class="center-kanji">
+      <span class="kanji">珈琲</span>
+      <span class="kanji-sub">一杯ずつ、ていねいに。</span>
+    </div>
+    <!-- 時計 -->
+    <div class="clock">
+      <span id="time">00:00</span>
+      <small id="date">MON 1 JAN · TOKYO</small>
+    </div>
+
+    <div class="wrap">
+      <!-- ガラスの見た目を付けるやつ
+           CSSの .pill がこれを見つけて、カプセルの形や光を付ける -->
+      <!-- href="#〇〇" で、同じページの id="〇〇" の場所までスクロールする -->
+      <a class="pill" href="#gallery">
+        <!-- 左のアイコンと見出し -->
+        <i class="ti ti-photo"></i>gallery
+        <!-- 右はしの「…」を入れる箱。CSSの margin-left: auto で右はしに -->
+        <span class="dots"><i class="ti ti-dots"></i></span>
+      </a>
+      <a class="pill" href="#menu">
+        <i class="ti ti-coffee"></i>menu
+        <span class="dots"><i class="ti ti-dots"></i></span>
+      </a>
+      <a class="pill" href="#access">
+        <i class="ti ti-map-pin"></i>access
+        <span class="dots"><i class="ti ti-dots"></i></span>
+      </a>
+      <!-- ボタンの下のお知らせ（.wrap の中に入れて、ボタンと重ならないようにする） -->
+      <div class="menu-card">
+        <h4>News</h4>
+        <div class="menu-row"><span>新メニュー登場</span></div>
+        <div class="menu-row"><span>来週15日臨時休業致します</span></div>
+        <div class="menu-row"><span>スタッフ募集</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 店内ギャラリー（横にゆっくり流れる） ===== -->
+  <section class="gallery" id="gallery">
+    <p class="gallery-eyebrow">GALLERY</p>
+    <h2 class="gallery-title">Inside our café</h2>
+    <div class="gallery-track">
+      <!-- 1セット目 -->
+      <img src="./images/menu-handdrip.jpg" alt="" style="height: 380px">
+      <img src="./images/gallery-pour1.jpg" alt="" style="height: 300px">
+      <img src="./images/menu-latte.jpg" alt="" style="height: 360px">
+      <img src="./images/gallery-pour2.jpg" alt="" style="height: 320px">
+      <img src="./images/menu-espresso.jpg" alt="" style="height: 380px">
+      <img src="./images/menu-cheesecake.jpg" alt="" style="height: 300px">
+      <!-- 2セット目（1セット目とまったく同じ。つなぎ目を見せないため） -->
+      <img src="./images/menu-handdrip.jpg" alt="" style="height: 380px">
+      <img src="./images/gallery-pour1.jpg" alt="" style="height: 300px">
+      <img src="./images/menu-latte.jpg" alt="" style="height: 360px">
+      <img src="./images/gallery-pour2.jpg" alt="" style="height: 320px">
+      <img src="./images/menu-espresso.jpg" alt="" style="height: 380px">
+      <img src="./images/menu-cheesecake.jpg" alt="" style="height: 300px">
+    </div>
+  </section>
+
+  <!-- ===== 店舗紹介 ===== -->
+  <section class="hero2" id="about">
+    <!-- 左：写真を2枚重ねる -->
+    <div class="about-photos">
+      <img class="about-photo-main" src="./images/gallery-pour1.jpg" alt="">
+      <img class="about-photo-sub" src="./images/menu-handdrip.jpg" alt="">
+    </div>
+    <!-- 右：縦書きのお店の名前と紹介文 -->
+    <div class="about-text">
+      <h2>珈琲 たくみ</h2>
+    <p>
+
+にぎやかな通りから一本入った、小さな路地の奥<br>
+８席だけの静かな店内で、一杯ずつハンドドリップでコーヒーを淹れています<br>
+
+豆は、季節ごとに選んだ産地のものを店内で焙煎<br>
+ゆっくりお湯を注ぎ、香りがいちばん引き立つ瞬間を待ってから、お出ししています<br>
+
+本を読む人、仕事をする人、ただぼんやり過ごす人<br>
+どんな過ごし方でも大丈夫です<br>
+いそがしい毎日の中で、ほっとひと息つける場所でありたいと思っています<br>
+
+一杯ずつ、ていねいに<br>
+あなたのための一杯を、お待ちしています<br>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== today menu ===== -->
+  <section class="section section-secondary" id="menu">
+    <p class="section-eyebrow">TODAY'S MENU</p>
+    <h2 class="section-headline">today menu</h2>
+    <ul class="grid grid-col-4">
+    <li class="grid-item">
+        <dl>
+            <dt>Hand Drip</dt><!--メニューの名前-->
+            <dd><img src="./images/menu-handdrip.jpg" alt="Hand Drip"></dd><!--写真-->
+            <dd>季節ごとに選んだ豆を、一杯ずつていねいにハンドドリップで。<span class="price">¥600</span></dd>
+        </dl>
+    </li>
+    <li class="grid-item">
+        <dl>
+            <dt>Café Latte</dt><!--メニューの名前-->
+            <dd><img src="./images/menu-latte.jpg" alt="Café Latte"></dd><!--写真-->
+            <dd>エスプレッソとなめらかなミルク。ラテアートを添えて。<span class="price">¥650</span></dd>
+        </dl>
+    </li>
+    <li class="grid-item">
+        <dl>
+            <dt>Basque Cheesecake</dt><!--メニューの名前-->
+            <dd><img src="./images/menu-cheesecake.jpg" alt="Basque Cheesecake"></dd><!--写真-->
+            <dd>表面をこんがり焼いた、とろける口どけのチーズケーキ。<span class="price">¥550</span></dd>
+        </dl>
+    </li>
+    <li class="grid-item">
+        <dl>
+            <dt>Espresso</dt><!--メニューの名前-->
+            <dd><img src="./images/menu-espresso.jpg" alt="Espresso"></dd><!--写真-->
+            <dd>深く香ばしい、小さなカップの濃い一杯。<span class="price">¥450</span></dd>
+        </dl>
+    </li>
+    </ul>
+  </section>
+
+  <!-- ===== 場所・地図 ===== -->
+  <section class="hero-4" id="access">
+    <!-- 左：お店の場所の情報 -->
+    <div class="access-info">
+      <p class="access-eyebrow">ACCESS</p>
+      <h2>場所/地図</h2>
+      <p class="access-address">珈琲 たくみ<br>東京都〇〇区〇〇 1-2-3</p>
+      <dl class="access-list">
+        <dt>OPEN</dt><dd>8:00 – 20:00</dd>
+        <dt>CLOSED</dt><dd>Wednesday</dd>
+        <dt>STATION</dt><dd>〇〇駅 徒歩5分</dd>
+      </dl>
+      <a class="access-btn" href="https://maps.google.com/maps?q=東京駅" target="_blank">Google マップで開く →</a>
+    </div>
+    <!-- 右：地図（外側の箱でフチと影を付けて、中の地図だけ暗くする） -->
+    <div class="map-frame">
+      <iframe
+        class="map"
+        src="https://maps.google.com/maps?q=東京駅&output=embed"
+        loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <p class="footer-copy">一杯ずつ、ていねいに。</p>
+    <p class="footer-name">珈琲 たくみ</p>
+    <p class="footer-small">© 2026 COFFEE TAKUMI</p>
+  </footer>
+
+<script src="透明.js"></script>
+<script src="slide.js"></script>
+</body>
+</html>
